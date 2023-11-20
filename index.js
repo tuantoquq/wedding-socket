@@ -7,7 +7,9 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  path: '/api/socket/io',
+});
 
 io.on('connection', (socket) => {
   console.log('User connected');
