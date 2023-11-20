@@ -1,6 +1,5 @@
 import express from 'express';
 import http from 'http';
-import cors from 'cors';
 import { Server } from 'socket.io';
 import dotenv from 'dotenv';
 import { addWish } from './comment.service.js';
@@ -23,10 +22,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('addWish', async (wish) => {
-    console.log('Wish added', wish);
     const comment = await addWish(wish);
-    console.log('Comment', comment);
-    io.emit('comment', comment);
+    io.emit('newWish', comment);
   });
 });
 
